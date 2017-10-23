@@ -1,0 +1,13 @@
+clc;
+clear;
+N=10000;
+T=1:1:N;
+R=randn(1,N);
+[Acor,Lag]=xcorr(R);
+figure(1);
+subplot(3,1,1);
+plot(T,R);
+subplot(3,1,2);
+histfit(R,30,'normal');
+subplot(3,1,3);
+plot(Lag,Acor);
