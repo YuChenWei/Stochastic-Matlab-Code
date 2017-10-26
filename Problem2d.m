@@ -1,0 +1,34 @@
+clc;
+clear;
+N=20000;
+T=1:1:N;
+Input=normrnd(0,30,1,N);
+TF1=tf([1],[2,1]);
+TF2=tf([0.25],[1,0.7071,0.25]);
+Output1=(lsim(TF1,Input,T))';
+Output2=(lsim(TF2,Input,T))';
+MEAN_I=mean(Input);
+MEAN_O1=mean(Output1);
+MEAN_O2=mean(Output2);
+VAR_I=var(Input);
+VAR_O1=var(Output1);
+VAR_O2=var(Output2);
+for i=1:1:9
+    MEAN_ErrorI(i)=((mean(Input(i*2000:1:(i+1)*2000)))-MEAN_I);
+    MEAN_ErrorO1(i)=((mean(Output1(i*2000:1:(i+1)*2000)))-MEAN_O1);
+    MEAN_ErrorO2(i)=((mean(Output2(i*2000:1:(i+1)*2000)))-MEAN_O2);
+    VAR_ErrorI(i)=((var(Input(i*2000:1:(i+1)*2000)))-VAR_I)*100/VAR_I;
+    VAR_ErrorO1(i)=((var(Output1(i*2000:1:(i+1)*2000)))-VAR_O1)*100/VAR_I;
+    VAR_ErrorO2(i)=((var(Output2(i*2000:1:(i+1)*2000)))-VAR_O2)*100/VAR_I;
+end
+MEAN_ErrorI
+MEAN_ErrorO1
+MEAN_ErrorO2
+VAR_ErrorI
+VAR_ErrorO1
+VAR_ErrorO2
+H1=runstest(Input)
+H2=runstest(Output1)
+H3=runstest(Output2)
+H4=runstest(Output1(100:1:N))
+H5=runstest(Output2(100:1:N))
