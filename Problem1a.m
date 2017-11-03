@@ -1,0 +1,13 @@
+clc;
+clear;
+N=1000;
+Sample=5;
+T=1:1:N;
+TF=tf([1],[2,1]);
+figure(1);
+subplot(2,1,1);
+step(TF);
+subplot(2,1,2);
+impulse(TF);
+figure(2);
+bode(TF);
